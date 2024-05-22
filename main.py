@@ -4,12 +4,25 @@ from preprocessing import handle_missing_values, remove_outliers, encode_categor
 from data_mining import split_data, train_model, evaluate_model
 from visualization import plot_confusion_matrix
 
-# Carregamento dos dados
+import pandas as pd
+
+FILE_PATH = 'arquivo/si_env-2020.csv'
+
+#Carregamento dos dados
 df = load_data('arquivo/si_env-2020.csv')
+df.columns = df.columns.str.strip()
+df.columns = df.columns.str.lower()
+
+print(df.columns.tolist())
+
+# Columns
+# ['num_boletim', 'data_hora_boletim', 'nº_envolvido', 'condutor', 'cod_severidade', 'desc_severidade', 'sexo', 'cinto_seguranca', 'embreagues', 'idade', 'nascimento', 'categoria_habilitacao', 'descricao_habilitacao', 'declaracao_obito', 'cod_severidade_antiga', 'especie_veiculo', 'pedestre', 'passageiro']
+
+df.rename(columns={'nº_envolvido': 'numero_envolvido'}, inplace=True)
 
 # Análise Exploratória
 descriptive_statistics(df)
-frequency_distribution(df, ['Condutor Responsável', 'Gravidade do Acidente', 'Sexo', 'Uso do Cinto de Segurança', 'Etilômetro', 'Óbito'])
+frequency_distribution(df, ['condutor', 'cod_severidade', 'sexo', 'cinto_seguranca', 'embreagues', 'declaracao_obito'])
 plot_gravity_distribution(df)
 correlation_heatmap(df)
 

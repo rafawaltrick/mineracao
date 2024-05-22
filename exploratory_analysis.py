@@ -12,7 +12,7 @@ def frequency_distribution(df, categorical_columns):
         print()
 
 def plot_gravity_distribution(df):
-    sns.countplot(x='Gravidade do Acidente', data=df)
+    sns.countplot(x='cod_severidade', data=df)
     plt.title('Distribuição de Gravidade dos Acidentes')
     plt.show()
 
