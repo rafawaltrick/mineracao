@@ -20,10 +20,19 @@ print(df.columns.tolist())
 
 df.rename(columns={'nº_envolvido': 'numero_envolvido'}, inplace=True)
 
+
+def convert_to_datetime(df):
+    df['data_hora_boletim'] = pd.to_datetime(df['data_hora_boletim'], format='%d/%m/%Y %H:%M', errors='coerce')
+    df['data_hora_boletim'] = df['data_hora_boletim'].dt.strftime('%Y-%m-%d %H:%M:%S')
+    breakpoint()
+    return df
+
+convert_to_datetime(df)
+
 # Análise Exploratória
 descriptive_statistics(df)
 frequency_distribution(df, ['condutor', 'cod_severidade', 'sexo', 'cinto_seguranca', 'embreagues', 'declaracao_obito'])
-plot_gravity_distribution(df)
+#plot_gravity_distribution(df)
 correlation_heatmap(df)
 
 # Pré-processamento
